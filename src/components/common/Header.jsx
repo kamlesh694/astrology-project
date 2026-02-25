@@ -7,6 +7,7 @@ import {
   Phone,
   Sparkles
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -70,18 +71,18 @@ export default function Navbar() {
 
             {/* Desktop Menu */}
             <nav className="hidden md:flex items-center font-semibold space-x-8 text-lg text-white">
-              <a href="#home" className="hover:text-yellow-400 transition">
+              <Link to="/" className="hover:text-yellow-400 transition">
                 Home
-              </a>
-              <a href="#about" className="hover:text-yellow-400 transition">
+              </Link>
+              <Link to="/about" className="hover:text-yellow-400 transition">
                 About
-              </a>
-              <a href="#about" className="hover:text-yellow-400 transition">
+              </Link>
+              <Link to="/service" className="hover:text-yellow-400 transition">
                 Services
-              </a>
-              <a href="#contact" className="hover:text-yellow-400 transition">
+              </Link>
+              <Link to="/contact" className="hover:text-yellow-400 transition">
                 Contact
-              </a>
+              </Link>
 
             </nav>
             <div><button className="bg-yellow-500 cursor-pointer hover:bg-yellow-400 text-black px-5 py-1 rounded-full font-semibold transition">
