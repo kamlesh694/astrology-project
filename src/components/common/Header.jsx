@@ -76,13 +76,17 @@ export default function Navbar() {
               <a href="#about" className="hover:text-yellow-400 transition">
                 About
               </a>
+              <a href="#about" className="hover:text-yellow-400 transition">
+                Services
+              </a>
               <a href="#contact" className="hover:text-yellow-400 transition">
                 Contact
               </a>
-              <button className="bg-yellow-500 cursor-pointer hover:bg-yellow-400 text-black px-5 py-1 rounded-full font-semibold transition">
-                Get Consultation
-              </button>
+
             </nav>
+            <div><button className="bg-yellow-500 cursor-pointer hover:bg-yellow-400 text-black px-5 py-1 rounded-full font-semibold transition">
+              Get Consultation
+            </button></div>
 
             {/* Mobile Menu Button */}
             <div className="md:hidden text-white">
