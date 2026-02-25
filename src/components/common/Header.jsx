@@ -1,71 +1,167 @@
-import React, { useState } from "react";
-import { Menu, X } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import {
+  Menu,
+  X,
+  Home,
+  Info,
+  Phone,
+  Sparkles
+} from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const closeMenu = () => setIsOpen(false);
+
+  // 🔒 Body scroll lock when sidebar open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpen]);
+
   return (
-    <header className="w-full bg-gradient-to-r from-purple-900 via-indigo-900 to-black text-white shadow-lg fixed top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between h-16">
+    <>
+      {/* Yellow Announcement Bar */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 
+  w-[90%] md:w-[900px]
+  bg-yellow-500 text-black text-sm py-2 px-6
+  overflow-hidden whitespace-nowrap
+  rounded-full shadow-xl z-[60]">
 
-          {/* Logo */}
-          <div className="text-2xl font-bold tracking-wide cursor-pointer">
-            🔮 AstroWorld
-          </div>
+        <div className="marquee-track flex gap-36 font-semibold">
+          <span>
+            🌟 आज ही अपनी कुंडली जांचें और जानें अपना भविष्य |
+            विशेषज्ञ ज्योतिष परामर्श उपलब्ध 🌟
+          </span>
 
-          {/* Desktop Menu */}
-          <nav className="hidden md:flex items-center space-x-8 text-lg">
-
-            <a href="#home" className="hover:text-yellow-400 transition duration-300">
-              Home
-            </a>
-
-            <a href="#about" className="hover:text-yellow-400 transition duration-300">
-              About
-            </a>
-
-            <a href="#contact" className="hover:text-yellow-400 transition duration-300">
-              Contact Us
-            </a>
-
-            <button className="bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-2 rounded-full font-semibold transition duration-300">
-              Contact
-            </button>
-
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-          </div>
+          <span>
+            🌟 आज ही अपनी कुंडली जांचें और जानें अपना भविष्य |
+            विशेषज्ञ ज्योतिष परामर्श उपलब्ध 🌟
+          </span>
         </div>
+
       </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-black bg-opacity-95 px-6 py-4 space-y-4 text-lg">
+      {/* Header */}
+      <header className="fixed top-[28px] left-0 w-full z-50 backdrop-blur-md bg-[#0b0b57d2] border-b border-white/20 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="flex items-center justify-between h-16">
 
-          <a href="#home" className="block hover:text-yellow-400 transition duration-300">
+            {/* Logo */}
+            <a
+              href="/"
+              className="text-2xl font-bold tracking-wide text-white flex items-center gap-2"
+            >
+              <Sparkles className="text-yellow-400" size={24} />
+              AstroWorld
+            </a>
+
+            {/* Desktop Menu */}
+            <nav className="hidden md:flex items-center font-semibold space-x-8 text-lg text-white">
+              <a href="#home" className="hover:text-yellow-400 transition">
+                Home
+              </a>
+              <a href="#about" className="hover:text-yellow-400 transition">
+                About
+              </a>
+              <a href="#contact" className="hover:text-yellow-400 transition">
+                Contact
+              </a>
+              <button className="bg-yellow-500 cursor-pointer hover:bg-yellow-400 text-black px-5 py-2 rounded-full font-semibold transition">
+                Get Consultation
+              </button>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden text-white">
+              <button
+                onClick={() => setIsOpen(true)}
+                aria-label="Open Menu"
+              >
+                <Menu size={28} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Overlay */}
+      <div
+        onClick={closeMenu}
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          } z-40`}
+      />
+
+      {/* Sidebar */}
+      <aside
+        className={`fixed top-0 right-0 h-full w-72 bg-gradient-to-b from-black via-gray-900 to-black text-white shadow-2xl transform transition-all duration-500 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"
+          } z-80 p-6`}
+      >
+        <div className="flex justify-between items-center mb-8">
+          <span className="text-xl font-semibold">Menu</span>
+          <button onClick={closeMenu} aria-label="Close Menu">
+            <X size={26} />
+          </button>
+        </div>
+
+        <nav className="flex flex-col  space-y-6 text-lg">
+
+          <a
+            href="#home"
+            onClick={closeMenu}
+            className="flex  items-center gap-3 hover:text-yellow-400 transition"
+          >
+            <Home size={20} />
             Home
           </a>
 
-          <a href="#about" className="block hover:text-yellow-400 transition duration-300">
+          <a
+            href="#about"
+            onClick={closeMenu}
+            className="flex items-center gap-3 hover:text-yellow-400 transition"
+          >
+            <Info size={20} />
             About
           </a>
 
-          <a href="#contact" className="block hover:text-yellow-400 transition duration-300">
-            Contact Us
+          <a
+            href="#contact"
+            onClick={closeMenu}
+            className="flex items-center gap-3 hover:text-yellow-400 transition"
+          >
+            <Phone size={20} />
+            Contact
           </a>
 
-          <button className="w-full bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-2 rounded-full font-semibold transition duration-300">
-            Contact
+          <button
+            onClick={closeMenu}
+            className="mt-[350px] bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-2 rounded-full font-semibold transition"
+          >
+            Get Consultation
           </button>
 
-        </div>
-      )}
-    </header>
+        </nav>
+      </aside>
+
+      {/* Marquee Animation */}
+      <style>
+        {`
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 18s linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+`}
+      </style>
+    </>
   );
 }
